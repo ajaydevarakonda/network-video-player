@@ -16,7 +16,6 @@ router.get('/ls', async function(req, res) {
 
     const requestedDirectory = path.join(rootDirectory, cwd);
 
-    console.log(requestedDirectory)
     if (! await fsExists(requestedDirectory))
         throw new Error(`Folder ${cwd} does not exist!`);
 
