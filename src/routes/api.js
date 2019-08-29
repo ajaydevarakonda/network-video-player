@@ -5,7 +5,7 @@ const fs = require('fs');
 const util = require('util');
 
 const fsExists = util.promisify(fs.exists);
-const { getVideoFiles } = require('../../lib');
+const { getFiles } = require('../../lib');
 
 router.get('/ls', async function(req, res) {
     const { rootDirectory } = req.app.locals; 
@@ -19,7 +19,7 @@ router.get('/ls', async function(req, res) {
     if (! await fsExists(requestedDirectory))
         throw new Error(`Folder ${cwd} does not exist!`);
 
-    res.json(await getVideoFiles(requestedDirectory));
+    res.json(await getFiles(requestedDirectory));
 });
 
 module.exports = router;
