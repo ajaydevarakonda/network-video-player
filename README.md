@@ -1,6 +1,7 @@
 # Network Video Player
 Network video player helps you play videos in your mobile phone from your computer, given that both the mobile and the computer are in the same wifi network.
 
+__Note__: The app hasn't been release to the app store yet. I'll update as soon as I add it to the app store.
 
 ## Installation instructions 
 ### Step 1 
