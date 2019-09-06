@@ -1,6 +1,6 @@
 {
   "name": "network-video-player",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Play videos over the network from a computer on to a mobile phone.",
   "main": "index.js",
   "scripts": {
