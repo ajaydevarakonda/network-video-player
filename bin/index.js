@@ -44,9 +44,11 @@ function getIPAddress() {
 
     app.listen(port, () => {
       console.log(`Enter http://${ipaddress}:${port}, when app asks.`);
-      console.log(
-        `Enter ${tunnelIp} if your computer and mobile are on different network.`
-      );
+      if (tunnelIp) {
+        console.log(
+          `Enter ${tunnelIp} if your computer and mobile are on different network.`
+        );
+      }
     });
   } catch (err) {
     if (process.env.ENV === "DEV") console.log(err);
