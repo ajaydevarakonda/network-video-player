@@ -28,6 +28,7 @@ function getIPAddress() {
 
 (async function() {
   try {
+    // ---------------------------------- setup ------------------------------------------
     const ipaddress = getIPAddress();
     const argv = yargs.boolean("enable-tunnel").argv;
     var tunnelIp = null;
@@ -42,6 +43,14 @@ function getIPAddress() {
       await ngrok.kill();
     });
 
+    // check if the process is run with sudo
+    if (! process.getuid || process.getuid() !== 0) {
+      console.error(`Error: Script should be run with superuser priviliges!`);
+      console.error(`sudo nvp <options>`);
+      process.exit(1);
+    }
+
+    // ---------------------------------- listen -----------------------------------------
     app.listen(port, () => {
       console.log(`Enter http://${ipaddress}:${port}, when app asks.`);
       if (tunnelIp) {
