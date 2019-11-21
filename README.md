@@ -8,7 +8,9 @@ __Note__: The app hasn't been release to the app store yet. I'll update as soon 
 You should have node.js and npm installed. Checkout Node.js [official installation page](https://nodejs.org/en/download/) if you do not have node.js installed on your computer. Then do the below in a terminal
 
 ```javascript
-npm i -g network-video-player
+sudo su
+npm i -g network-video-player // copy paste this, do not make misspell, as you are a super user.
+exit
 ```
 
 ### Step 2
@@ -21,7 +23,7 @@ Open a terminal and go to the folder you'd like to see the files on.
 // for example
 $ cd ~/Videos
 // run nvp
-$ nvp
+$ sudo nvp
 Enter http://192.168.43.177:3333, when app asks!
 ```
 
