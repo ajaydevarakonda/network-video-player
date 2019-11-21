@@ -4,6 +4,8 @@ var os = require("os");
 var ifaces = os.networkInterfaces();
 const yargs = require("yargs");
 const ngrok = require("ngrok");
+const childProcess = require('child_process');
+var debug = require('debug')('bin/index.js')
 
 const port = 3333;
 
@@ -24,6 +26,22 @@ function getIPAddress() {
   }
 
   return ipAddress;
+}
+
+async function exec(command) {
+  return new Promise(function(resolve, reject) {
+    childProcess.exec(command, function(err, stdout, stderr) {
+      if (err instanceof Error) {
+          reject(err);
+      }
+
+      if (stdout) {
+        return resolve(stdout);
+      } else if (stderr) {
+        return reject(stderr);
+      }
+    });
+  });
 }
 
 (async function() {
@@ -50,6 +68,20 @@ function getIPAddress() {
       process.exit(1);
     }
 
+    if (process.platform.match(/linux/)) {
+      const osDetails_str = await exec('hostnamectl');
+
+      console.log(`Opening port 3333 on your 'fedora' os...`);
+      if (osDetails_str.match(/fedora/)) {
+        const execRes = await exec(`sudo firewall-cmd --add-port=3333/tcp`);
+        if (execRes.match(/success/)) {
+          console.log(`Successfully opened port 3333 on your 'fedora' os!`);
+        }
+      }
+    }
+
+    // once setup is done, then make script non su.
+
     // ---------------------------------- listen -----------------------------------------
     app.listen(port, () => {
       console.log(`Enter http://${ipaddress}:${port}, when app asks.`);
@@ -60,7 +92,7 @@ function getIPAddress() {
       }
     });
   } catch (err) {
-    if (process.env.ENV === "DEV") console.log(err);
-    else console.error("Something went wrong!");
+    /* if (process.env.ENV === "DEV") */console.log(err);
+    // else console.error("Something went wrong!");
   }
 })();

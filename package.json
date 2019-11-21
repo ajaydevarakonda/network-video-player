@@ -22,6 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@ffprobe-installer/ffprobe": "^1.0.8",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ngrok": "^3.2.5",
     "node-ffprobe": "^3.0.0",
