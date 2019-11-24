@@ -29,8 +29,8 @@ Install nvb app on your android phone.
 ### Step 3 - Open port
 If you'd like to view videos from your computer on your mobile and they are in the same network and youi don't want to use a tunnel then you have to open port 3333 on your computer. 
 
-
 __Note:__ Opening a port is done automatically for __Fedora linux distro__.
+
 
 ### Step 4 - Run nvp
 Open a terminal and go to the folder you'd like to see the files on.
@@ -43,8 +43,18 @@ $ sudo nvp
 Enter http://192.168.43.177:3333, when app asks!
 ```
 
+
+### Step 5 - Make sure the port is open
+If you'd like to use nvp locally without tunnel, you might need to openup the port 3333 on your machine.
+
+Try to open the ipaddress for example `http://192.168.43.177:3333` in a webbrowser on your mobile and you should see the latest time in the response page. If the page is unreachable and there are no errors, its mostly because your 3333 is closed.
+
+
+### Step 6 - Open the ip address in the application
 Enter the ip address from the terminal as is in the application. That is it! You should be able to browse the folders and view most of the videos in those folders. Currently 'mpeg4', 'h264' codecs are viewable.
 
+
+## Final words
 If you'd like to contribute to the backend part of the application please send pull requests to this repository. 
 
 If you see any issues please consider creating an issue in this repository.
