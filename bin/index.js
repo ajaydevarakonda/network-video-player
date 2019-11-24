@@ -118,15 +118,25 @@ function beforeExit(cb) {
       process.exit(1);
     }
 
-    if (process.platform.match(/linux/)) {
+    if (process.platform.match(/linux/gi)) {
       const osDetails_str = await exec('hostnamectl');
 
-      debug(`Opening port 3333 on your 'fedora' os...`);
-      if (osDetails_str.match(/fedora/)) {
+      if (osDetails_str.match(/fedora/gi)) {
+        debug(`Opening port 3333 on your 'fedora' os...`);
         // need not close port again, this is a temporary open, restart will reset this setting.
         const execRes = await exec(`sudo firewall-cmd --add-port=3333/tcp`);
-        if (execRes.match(/success/)) {
+        if (execRes.match(/success/gi)) {
           debug(`Successfully opened port 3333 on your 'fedora' os!`);
+        } else {
+          throw new Error('Unable to open port!')
+        }
+      } else if (osDetails_str.match(/ubuntu/gi)) {
+        debug(`Opening port 3333 on your 'ubuntu' os...`);
+        const execRes = await exec(`sudo ufw allow 3333/tcp`);
+        if (execRes.match(/rules\ updated/gi)) {
+          debug(`Successfully opened port 3333 on your 'ubuntu' os!`);
+        } else {
+          throw new Error('Unable to open port!')
         }
       }
     }
@@ -142,6 +152,7 @@ function beforeExit(cb) {
     });
   } catch (err) {
     debug(err);
-    console.error("Something went wrong!");
+    console.error(err.message);
+    process.exit(1);
   }
 })();
