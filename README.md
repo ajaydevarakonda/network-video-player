@@ -3,9 +3,6 @@ Network video player helps you play videos in your mobile phone from your comput
 1. When both mobile and the computer are in the same wifi network.
 2. When they are both connected to a high speed internet connection.
 
-__Note__: The app hasn't been release to the app store yet. I'll update as soon as I add it to the app store.
-
-
 
 ## Installation instructions 
 ### Prequisites
@@ -23,7 +20,8 @@ exit
 
 
 ### Step 2 - Install nvp android app
-Install nvb app on your android phone.
+Download the application from google play store and install the application on your android phone. 
+https://play.google.com/store/apps/details?id=com.ramachandrajr.network_video_player
 
 
 ### Step 3 - Open port
