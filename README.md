@@ -3,6 +3,16 @@ Network video player helps you play videos in your mobile phone from your comput
 1. When both mobile and the computer are in the same wifi network.
 2. When they are both connected to a high speed internet connection.
 
+## Usage
+1. Run network-video-player with phone and computer on the same wifi network. (Computer can also be a desktop connected via ethernet to the wifi router.)
+```
+sudo nvp
+```
+2. Run network-video-player with phone and computer on different networks.
+```
+sudo nvp --enable-tunnel
+```
+
 
 ## Installation instructions 
 ### Prequisites
