@@ -1,3 +1,7 @@
+/**
+ * Contains code for express server setup application.
+ */
+
 const express = require('express');
 const app = express();
 const serveStatic = require('serve-static');

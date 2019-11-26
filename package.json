@@ -4,10 +4,7 @@
   "description": "Play videos over the network from a computer on to a mobile phone.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "nvp": "bin/index.js"
+    "start": "electron ."
   },
   "keywords": [
     "mobile",
@@ -29,5 +26,8 @@
     "node-ffprobe": "^3.0.0",
     "serve-static": "^1.14.1",
     "yargs": "^14.0.0"
+  },
+  "devDependencies": {
+    "electron": "^7.1.2"
   }
 }
