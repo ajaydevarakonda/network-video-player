@@ -1,6 +1,6 @@
 {
   "name": "network-video-player",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Play videos over the network from a computer on to a mobile phone.",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "browse"
   ],
   "author": "Ramachandra Junior <contact@ajaydevarakonda.dev> (https://ajaydevarakonda.dev/)",
-  "homepage": "https://github.com/ajaydevarakonda/network-video-player/blob/master/README.md",
+  "homepage": "https://github.com/ajaydevarakonda/network-video-player/blob/npm-module/README.md",
   "license": "MIT",
   "dependencies": {
     "@ffprobe-installer/ffprobe": "^1.0.8",
