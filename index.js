@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
+
 const ngrok = require("ngrok");
 const path = require('path');
 const dotenv = require('dotenv');
@@ -13,12 +14,14 @@ const server = require('./src/server');
 const port = 3333;
 var mainWindow;
 var tunnelIp;
+var serverClose;
 
 function createWindow() {
   // Create the browser window.
+  // TODO: change width to 600, height to 250
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 250,
+    width: 800,
+    height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
@@ -26,7 +29,7 @@ function createWindow() {
   })
 
   mainWindow.loadFile('index.html')
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -45,16 +48,31 @@ app.on('ready', async function () {
   var message = '';
   tunnelIp = await ngrok.connect({ addr: port });
 
-  server.listen(port, () => {
+  const { close } = server.listen(port, () => {
     message = `Enter http://${ipaddress}:${port}, when app asks.<br/>`;
-    if (tunnelIp) {      
+    if (tunnelIp) {
       message += `Enter ${tunnelIp} if your computer and mobile are on different network.`
     }
   });
+  serverClose = close;
 
-  ipc.once('window-loaded', async function(event, data) {
+  ipc.on('window-loaded', async function (event, data) {
     event.sender.send('backend-msg', message);
   });
+
+  ipc.on('select-folder', async function (event) {
+    // show select folder dialogue
+    const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+    })
+    
+    if (! canceled && filePaths.length) {
+      const folderPath = filePaths[0];
+      server.locals.rootDirectory = folderPath;
+      event.sender.send('folder-selected', folderPath);
+    }
+  })
+
   createWindow();
 })
 
@@ -73,6 +91,7 @@ app.on('activate', function () {
   if (mainWindow === null) createWindow()
 })
 
-app.on('before-quit', async function() {
+app.on('before-quit', async function () {
   await ngrok.kill();
+  serverClose();
 })

@@ -17,10 +17,17 @@
 
 <body>
   <p>Thanks for using nvp!</p>
+
+  <div>
+      <button id="folder-selector-btn" class="btn btn-primary">Select directory</button>
+      <span id="dir-msg">No directory selected!</span>
+  </div>
+
   <p id="backend-msg"></p>
 
   <script>
-    var ipc = require('electron').ipcRenderer;
+    const ipc = require('electron').ipcRenderer;
+    var folderToServe = '~';
 
     window.addEventListener('load', function() {
       ipc.send('window-loaded');
@@ -28,6 +35,13 @@
 
     ipc.on('backend-msg', function (event, msg) {
       document.getElementById('backend-msg').innerHTML = msg;
+    })
+
+    document.getElementById('folder-selector-btn').addEventListener('click', function(e) {
+      ipc.send('select-folder');
+      ipc.once('folder-selected', function(event, folderpath) {
+        document.getElementById('dir-msg').textContent = `Serving ${folderpath} as base directory!`;
+      });
     })
   </script>    
 </body>
