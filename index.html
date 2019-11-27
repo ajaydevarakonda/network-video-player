@@ -27,7 +27,6 @@
 
   <script>
     const ipc = require('electron').ipcRenderer;
-    var folderToServe = '~';
 
     window.addEventListener('load', function() {
       ipc.send('window-loaded');
