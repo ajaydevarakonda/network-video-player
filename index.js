@@ -18,8 +18,8 @@ var serverClose;
 function createWindow() {
   // TODO: change width to 600, height to 250
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 250,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
