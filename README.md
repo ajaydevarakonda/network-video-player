@@ -27,6 +27,7 @@ sudo su
 npm i -g network-video-player // copy paste this, do not make misspell, as you are a super user.
 exit
 ```
+or you can install from binary depending on your architecture and distribution, please check https://github.com/ajaydevarakonda/network-video-player/releases/tag/v1.0.0 for a list of all releases.
 
 
 ### Step 2 - Install nvp android app
